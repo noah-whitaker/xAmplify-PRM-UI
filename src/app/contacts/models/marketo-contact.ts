@@ -7,6 +7,7 @@ export class MarketoContact{
     contactName: string;
     socialNetwork: string;
     showLogin: boolean;
+    
     jsonData: string;
     statusCode: number;
     contactType: string;
@@ -23,5 +24,5 @@ export class MarketoContact{
     address: string;
     company: string;
     mobilePhone: string;
-
+    
 }
