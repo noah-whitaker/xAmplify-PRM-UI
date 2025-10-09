@@ -13,7 +13,7 @@ export class DealComments {
      createdAt:Date;
      userId:number;
      commentedByEmail: string;
-	commentedByFullName: string;
-	commentedByImage = "assets/images/icon-user-default.png";     
+	 commentedByFullName: string;
+	 commentedByImage = "assets/images/icon-user-default.png";     
      activityType:any;
 }
