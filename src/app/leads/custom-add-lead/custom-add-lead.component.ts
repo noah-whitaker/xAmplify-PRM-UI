@@ -1639,7 +1639,8 @@ export class CustomAddLeadComponent implements OnInit {
     let encodedUserListId = this.referenceService.encodePathVariable(this.selectedContact.userListId);
 		let encodeUserId = this.referenceService.encodePathVariable(this.selectedContact.id);
     if (this.isFromCompanyModule && !this.isCompanyJourney && !this.isFromCompanyJourney) {
-      this.referenceService.goToRouter(RouterUrlConstants.home+RouterUrlConstants.contacts+RouterUrlConstants.company +RouterUrlConstants.editContacts+RouterUrlConstants.details+encodedUserListId+"/"+encodeUserId);
+      let url = RouterUrlConstants.home+RouterUrlConstants.contacts+RouterUrlConstants.company +RouterUrlConstants.editContacts+RouterUrlConstants.details+encodedUserListId+"/"+encodeUserId;
+      this.referenceService.goToRouter(url);
     } else if ((this.isCompanyJourney || this.isFromCompanyJourney) && this.selectedContact.userListId == undefined) {
       let url = 'home/company/manage/details/'+encodeUserId;
       this.referenceService.goToRouter(url);
