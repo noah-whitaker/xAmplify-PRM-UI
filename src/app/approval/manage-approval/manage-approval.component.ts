@@ -222,6 +222,10 @@ export class ManageApprovalComponent implements OnInit {
     this.searchKey = "";
     this.clearFilterOptions();
     this.clearSelectedItems();
+    this.checkFilterStatus(event);
+  }
+
+  private checkFilterStatus(event: any) {
     if (event == 'APPROVED') {
       this.selectedFilterStatus = 'APPROVED';
       this.getAllApprovalList(this.pagination);
