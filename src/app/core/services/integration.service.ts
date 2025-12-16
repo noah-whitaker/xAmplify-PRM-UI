@@ -202,4 +202,26 @@ export class IntegrationService {
         return null;
     }
 
+    validateCustomCrmIntegration(pat: string, loggedInUserId: number) {
+        const url = `${this.authenticationService.REST_URL}/myProfile/custom-crm/validate?access_token=${this.authenticationService.access_token}`;
+        const request = { pat: pat, userId: loggedInUserId };
+        return this._http.post(url, request)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+
+    fetchCustomCrmActiveIntegration(loggedInUserId: number) {
+        const url = `${this.authenticationService.REST_URL}/myProfile/custom-crm/active/${loggedInUserId}?access_token=${this.authenticationService.access_token}`;
+        return this._http.get(url)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+
+    unlink() {
+        const url = `${this.authenticationService.REST_URL}/myProfile/unlink/${this.authenticationService.getUserId()}?access_token=${this.authenticationService.access_token}`;
+        return this._http.get(url)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+
 }

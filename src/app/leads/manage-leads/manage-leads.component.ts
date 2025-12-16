@@ -1185,7 +1185,36 @@ triggerUniversalSearch(){
   }
 
   syncLeadsWithActiveCRM() {
+    this.leadsResponse = new CustomResponse('SUCCESS', "Synchronization is in progress. This might take few minutes. Please wait...", true);
+    this.referenceService.loading(this.httpRequestLoader, true);
+    this.referenceService.loading(this.campaignRequestLoader,true);
+    this.leadsService.syncLeadsWithActiveCRM(this.loggedInUserId)
+      .subscribe(
+        data => {
+          let statusCode = data.statusCode;
+          if (statusCode == 200) {
+            this.referenceService.loading(this.httpRequestLoader, false);
+            this.leadsResponse = new CustomResponse('SUCCESS', "Synchronization completed successfully", true);
+            //this.getCounts();  
+            this.showLeads();
+          } else if (data.statusCode === 401 && data.message === "Expired Refresh Token") {
+            this.referenceService.loading(this.httpRequestLoader, false);
+            this.leadsResponse = new CustomResponse('ERROR', "Your Integration was expired. Please re-configure.", true);
+          } 
+          else {
+            this.referenceService.loading(this.httpRequestLoader, false);
+            this.leadsResponse = new CustomResponse('ERROR', "Synchronization Failed", true);
+          }
+        },
+        error => {
+          this.referenceService.loading(this.httpRequestLoader, false)
+          this.leadsResponse = new CustomResponse('ERROR', "Your integration is not valid. Re-configure with valid API Token",true);
 
+        },
+        () => {
+          // this.referenceService.loading(this.httpRequestLoader, false);
+        }
+      );
   }
 
   companyNamesForPartner(){

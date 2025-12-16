@@ -1,0 +1,94 @@
+
+<app-response-message [customResponse]="customResponse" *ngIf="customResponse?.isVisible"></app-response-message>
+
+<!-- <app-modal-popup-loader *ngIf="loading"></app-modal-popup-loader> -->
+<!-- <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading> -->
+<form class="crm-form" [formGroup]="patForm" *ngIf="!showDetails && !loading" novalidate>
+  <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+  <div class="form-group">
+    <label for="pat">Personal Access Token</label>
+    <input id="pat" type="text" formControlName="pat" class="form-control" placeholder="Enter your PAT"
+      [class.has-error]="patForm.get('pat').invalid && (patForm.get('pat').touched || patForm.get('pat').dirty)" />
+    <div class="error-message"
+      *ngIf="patForm.get('pat').invalid && (patForm.get('pat').touched || patForm.get('pat').dirty)">
+      Personal Access Token is required.
+    </div>
+  </div>
+  <div class="action-row">
+    <button type="button" class="btn btn-primary" [disabled]="loading || patForm.invalid" (click)="onConfigure()">{{
+      reconfiguring ? 'Reconfigure' : 'Configure' }}</button>
+    <button type="button" class="btn btn-default" *ngIf="reconfiguring" [disabled]="loading"
+      (click)="closeReconfigure()">Cancel</button>
+  </div>
+</form>
+
+<div class="">
+  <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
+  <div class="details-grid mb20" *ngIf="!loading && showDetails">
+
+    <div class="detail-panel">
+      <div class="panel-header">
+        <h5>xAmplify User Details</h5>
+      </div>
+
+      <div id="home" *ngIf="xAmplifyUserName || xAmplifyUserEmailId || xAmplifyUserOrgnizationName; else noUserDetails"
+        class="tab-pane fade in active integration-profile">
+        <div class="user-profile">
+          <div class="profile-image-wrapper-color mt10">
+            <img class="profile-image" alt="No image found" src="assets/images/icon-user-default.png">
+          </div>
+          <div class="pl10 pt10">
+            <h4 class="media-heading"><b>{{xAmplifyUserName ? xAmplifyUserName : '--'}}</b></h4>
+            <h5>Email: {{xAmplifyUserEmailId}}</h5>
+            <h5>Organization Name: {{xAmplifyUserOrgnizationName ? xAmplifyUserOrgnizationName : '--'}}</h5>
+          </div>
+        </div>
+      </div>
+
+      <ng-template #noUserDetails>
+        <p class="muted">No xAmplify user details found.</p>
+      </ng-template>
+    </div>
+
+    <div class="detail-panel">
+      <div class="panel-header">
+        <h5>{{xAmplifyCrmType == undefined ? '' : xAmplifyCrmType}} Integration Details</h5>
+      </div>
+      <div id="home"
+        *ngIf="activeIntegrationUserName || activeIntegrationUserEmailId || activeIntegrationOrganizationName; else noActiveDetails"
+        class="tab-pane fade in active integration-profile">
+        <div class="user-profile">
+          <div class="profile-image-wrapper-color mt10">
+            <img class="profile-image" alt="No image found" src="assets/images/icon-user-default.png">
+          </div>
+          <div class="pl10 pt10">
+            <h4 class="media-heading"><b>{{activeIntegrationUserName ? activeIntegrationUserName : '--'}}</b></h4>
+            <h5>Email: {{activeIntegrationUserEmailId}}</h5>
+            <h5>Organization Name: {{activeIntegrationOrganizationName ? activeIntegrationOrganizationName : '--'}}</h5>
+          </div>
+        </div>
+      </div>
+
+      <ng-template #noActiveDetails>
+        <p class="muted">No active integration details found.</p>
+      </ng-template>
+    </div>
+  </div>
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 p0 mb10" *ngIf="!loading && showDetails">
+    <div class="detail-panel justify-content-between align-items-center d-flex">
+      <div>
+        <p>**You can sync the pipelines and custom forms with xAmplify by clicking on Sync button.
+          **Please note that this will overwrite any existing data by xAmplify data.</p>
+          <p>Last synced at: <b>{{updatedDate | date:'medium'}}</b></p>
+      </div>
+      <div>
+        <button type="button" class="btn btn-primary" [disabled]="loading" (click)="syncWithXamplify()">Sync With
+          xAmplify</button>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 justify-content-end align-items-center d-flex p0" *ngIf="!loading && showDetails">
+    <button type="button" class="btn btn-primary" [disabled]="loading" (click)="startReconfigure()">Reconfigure</button>
+    <button class="btn Btn-Gray Btn-Gray" (click)="unlinkConfirmation()">Unlink</button>
+  </div>
+</div>

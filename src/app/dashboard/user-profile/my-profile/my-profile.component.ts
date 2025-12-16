@@ -404,6 +404,7 @@ export class MyProfileComponent implements OnInit, AfterViewInit, OnDestroy {
     /*** XNFR-1062 ***/
 	showMailIntegration: boolean = false;
     mailsEnabled: boolean = false;
+	showCustomCRMIntegration: boolean;
 	constructor(public videoFileService: VideoFileService, public socialPagerService: SocialPagerService, public paginationComponent: PaginationComponent, public countryNames: CountryNames, public fb: FormBuilder, public userService: UserService, public authenticationService: AuthenticationService,
 		public logger: XtremandLogger, public referenceService: ReferenceService, public videoUtilService: VideoUtilService,
 		public router: Router, public callActionSwitch: CallActionSwitch, public properties: Properties,
@@ -2247,6 +2248,12 @@ export class MyProfileComponent implements OnInit, AfterViewInit, OnDestroy {
 		} else if(this.activeTabName == 'mailIntegration') {
 			this.showMailIntegration = true;
 			this.activeTabHeader = this.properties.mailIntegration;
+		} else if (this.activeTabName == 'syncWithXamplify') {
+			this.showCustomCRMIntegration = true;
+			this.activeTabHeader = 'xAmplify Integration';
+		}
+		if (this.activeTabName != 'syncWithXamplify') {
+			this.showCustomCRMIntegration = false;
 		}
 		if (this.integrationTabIndex == 5) {
 			this.integrationTabIndex = 0;

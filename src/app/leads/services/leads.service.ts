@@ -131,7 +131,7 @@ export class LeadsService {
   }
 
   syncLeadsWithActiveCRM(userId: number) {
-    return this.http.get(this.authenticationService.REST_URL + `/crm/active/leads/sync/${userId}?access_token=${this.authenticationService.access_token}`)
+    return this.http.get(this.authenticationService.REST_URL + `/lead/sync/details/${userId}?access_token=${this.authenticationService.access_token}`)
       .map(this.extractData)
       .catch(this.handleError);
   }

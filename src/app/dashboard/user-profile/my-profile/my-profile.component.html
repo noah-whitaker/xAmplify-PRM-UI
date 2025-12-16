@@ -309,12 +309,20 @@
                                             </a>
                                         </li>
                                         <!--Integrations-->
-                                        <li [ngClass]="{'active-tab': activeTabName == 'integrations'}" *ngIf="authenticationService?.module?.isAnyAdminOrSupervisor">
+                                        <!-- <li [ngClass]="{'active-tab': activeTabName == 'integrations'}" *ngIf="authenticationService?.module?.isAnyAdminOrSupervisor">
                                             <a [ngClass]="{'active-tab-anchor-text': activeTabName == 'integrations'}"
                                                 (click)="activateTab('integrations');clearCustomResponse()">
                                                 {{properties.integrations | translate }}
                                                 <ng-template [ngTemplateOutlet]="activeIcon"
                                                     [ngTemplateOutletContext]="{'moduleName':'integrations'}"></ng-template>
+                                            </a>
+                                        </li> -->
+
+                                        <li [ngClass]="{'active-tab': activeTabName == 'syncWithXamplify'}">
+                                            <a [ngClass]="{'active-tab-anchor-text': activeTabName == 'syncWithXamplify'}"
+                                                (click)="activateTab('syncWithXamplify');clearCustomResponse()">xAmplify Integration
+                                                <ng-template [ngTemplateOutlet]="activeIcon"
+                                                    [ngTemplateOutletContext]="{'moduleName':'syncWithXamplify'}"></ng-template>
                                             </a>
                                         </li>
 
@@ -2075,6 +2083,11 @@
                                             [ngClass]="{'active': activeTabName == 'saml2SSOsettings'}"
                                             *ngIf="showSaml2SSOsettings">
                                             <app-saml-sso-login> </app-saml-sso-login>
+                                        </div>
+
+                                        <div class="tab-pane" [ngClass]="{'active': activeTabName == 'syncWithXamplify'}"
+                                            *ngIf="showCustomCRMIntegration">
+                                            <app-custom-crm-integration></app-custom-crm-integration>
                                         </div>
 
                                         <!-- Oauth SSO settings -->
