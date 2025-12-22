@@ -4,6 +4,14 @@
 <!-- <app-modal-popup-loader *ngIf="loading"></app-modal-popup-loader> -->
 <!-- <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading> -->
 <form class="crm-form" [formGroup]="patForm" *ngIf="!showDetails && !loading" novalidate>
+  <div class="alert alert-danger" role="alert">
+    <strong translate>Oh no! It looks like you haven’t configured a CRM yet. No worries—xAmplify offers seamless
+      integration with leading CRM platforms such as Salesforce, HubSpot, Zoho, and Pipedrive to ensure complete deal
+      synchronization.
+      To set up CRM integration, <a href="https://xamplify.com" target="_blank">sign up</a> for xAmplify and configure your CRM account. If you need assistance with the
+      configuration, please contact our help desk at <a
+        href="mailto:support@xamplify.com">support@xamplify.com</a></strong>
+  </div>
   <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '14px' }"></ngx-loading>
   <div class="form-group">
     <label for="pat">Personal Access Token</label>
