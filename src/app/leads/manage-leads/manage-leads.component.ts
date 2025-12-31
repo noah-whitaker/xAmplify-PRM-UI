@@ -1441,11 +1441,7 @@ triggerUniversalSearch(){
   /*** XNFR-839 */
   selectedFields: any[] = [];
   exportExcelSelection() {
-    if (this.authenticationService.companyProfileName) {
-        this.getActiveCRMDetailsByCompanyProfileName();
-    } else {
-      this.downloadLeads(this.leadsPagination);
-    }
+    this.downloadLeads(this.leadsPagination);
   }
   
   openSelectFieldPopup() {

@@ -1503,11 +1503,7 @@ export class ManageDealsComponent implements OnInit {
   setDefaultFields:boolean = false;
   selectedFields: any[] = [];
   exportExcelSelection() {
-    if (this.authenticationService.companyProfileName) {
-        this.openSelectFieldPopup(); 
-    } else {
-      this.downloadDeals(this.dealsPagination)
-    }
+    this.downloadDeals(this.dealsPagination);
   }
   openSelectFieldPopup() {
     this.showSlectFieldComponent = true
