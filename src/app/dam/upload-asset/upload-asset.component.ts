@@ -897,19 +897,7 @@ if ((length % 2) == 0) {
   }
   // cloud content -- Google Drive code changes  
   googleDriveChange() {
-      try {
-    	  this.damUploadPostDto.source = 'Google Drive';
-          this.videoFileService.hasVideoAccess(this.loggedInUserId)
-              .subscribe(
-              (result: any) => {
-                  if (result.access) {
-                      this.onApiLoad();
-                  } else {
-                      this.authenticationService.forceToLogout();
-                  }
-              }
-              );
-      } catch (error) { this.xtremandLogger.error('Error in upload video googleDriveChange method' + error); }
+      this.referenceService.showAlert();
     }
   
   onApiLoad() {
@@ -972,47 +960,12 @@ if ((length % 2) == 0) {
   
   // cloud content -- DropBox code changes  
   dropBoxChange() {
-      try {
-    	  this.damUploadPostDto.source= 'Dropbox';
-          const self = this;
-          const options = {
-              success: function(files: any) {
-                  self.setCloudContentValues(files[0].name, files[0].link);
-              },
-              cancel: function() {
-              },
-              linkType: 'direct',
-              multiselect: false,
-              // extensions: ['.m4v', '.avi', '.mpg', '.mp4', '.flv', '.mov', '.wmv', '.divx', '.f4v', '.mpeg', '.vob', '.xvid', '.mkv'],
-          };
-          Dropbox.choose(options);
-      } catch (error) { this.xtremandLogger.error('Error in upload video downloadFromDropbox' + error); }
+      this.referenceService.showAlert();
   }
   
 //cloud content -- Box code changes 
   downloadFrombox() {
-      try{
-    	  this.damUploadPostDto.source= 'Box';
-        const value = this;
-        const options = {
-            clientId: 'a8gaa6kwnxe10uruyregh3u6h7qxd24g',
-            linkType: 'direct',
-            multiselect: false,
-        };
-        const boxSelect = new BoxSelect(options);
-        boxSelect.launchPopup();
-        const self = this;
-        boxSelect.success(function (files: any) {
-            if (files[0].name) {
-                self.setCloudContentValues(files[0].name, files[0].url);
-            } 
-        });
-        // Register a cancel callback handler
-        boxSelect.cancel(function () {
-            console.log('The user clicked cancel or closed the popup');
-            //self.defaultSettings();
-        });
-      } catch(error) { this.xtremandLogger.error('upload video downloadFrombox'+error);swal.close();}
+      this.referenceService.showAlert();
     };
     
     setCloudContentValues(uploadedCloudAssetName:string, downloadLink:string) {
@@ -1131,87 +1084,7 @@ if ((length % 2) == 0) {
         $('#myModal').modal('show');
     }
     cameraChange() {
-        if(this.isIE() || this.browserInfo.includes('edge') ){
-          swal('Oops...',  'This Cam won\'t work in Internet explorar and edge browser!', 'error');
-         }
-        else {
-        if (true) {
-            this.camera = true;
-            this.isFileDrop = true;
-            this.fileDropDisabled();
-            this.recordVideo();
-            this.playerInit = true;
-            const self = this;
-            self.player = videojs('myVideo',
-                {
-                    controls: true,
-                    loop: false,
-                    width: 676,
-                    height: 360,
-                    plugins: {
-                        record: {
-                            maxLength: self.maxTimeDuration,
-                            debug: true,
-                            audio: true,
-                            video: {
-                                // video constraints: set resolution of camera
-                                mandatory: {
-                                    minWidth: 640,
-                                    minHeight: 360,
-                                },
-                            },
-                            // dimensions of captured video frames
-                            frameWidth: 640,
-                            frameHeight: 360
-                        }
-                    },
-                    controlBar: {
-                        // hide volume and fullscreen controls
-                        volumeMenuButton: false
-                    }
-                });
-            self.player.on('deviceError', function () {
-                console.log('device error:', this.player.deviceErrorCode);
-            });
-            self.player.on('deviceReady', function () {
-                self.saveVideo = false;
-                self.discardVideo = false;
-                $('.video-js .vjs-fullscreen-control').hide();
-                console.log('device error:', this.player.deviceErrorCode);
-            });
-            self.player.on('error', function (error: any) {
-                console.log('error:', error);
-            });
-            // user clicked the record button and started recording
-            self.player.on('startRecord', function () {
-                console.log('started recording!');
-                self.closeModalId = false; // close button disabled for modal pop up
-                $('#script-text').scrollTop(0);
-                self.stopButtonShow = false; // stop button hide in modal pop up
-                self.stopButtonDisabled = true; // stop button disabled in modal pop up
-                self.testSpeedshow = true; // show the test speed button
-                self.testSpeeddisabled = true; // test speed button disabled
-                self.testSpeed();
-                self.rageDisabled = true;
-                console.log('started recording!');
-                self.saveVideo = false; // save button disabled
-                self.discardVideo = false; // discard button disabled
-            });
-            // user completed recording and stream is available
-            self.player.on('finishRecord', function () {
-                self.saveVideo = true; // save button enabled
-                self.discardVideo = true; // discard button enabled
-                self.testSpeeddisabled = false; // enabled the test speed button
-                self.closeModalId = true; // close button enabled
-                $('.video-js .vjs-fullscreen-control').show();
-                $('.vjs-volume-panel-horizontal').attr('style', 'display:none');
-                $('.vjs-volume-panel .vjs-control .vjs-volume-panel-horizontal').css('cssText', 'display:none !important');
-                self.stop();
-                self.rageDisabled = false;
-                self.recordedVideo = self.player.recordedData;
-            });
-        }
-      }
+        this.referenceService.showAlert();
     }
     
     fileDropDisabled() {

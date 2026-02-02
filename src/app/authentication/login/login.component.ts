@@ -130,7 +130,15 @@ export class LoginComponent implements OnInit, OnDestroy {
           this.referenceService.userName = userName;
           if (this.authenticationService.vanityURLEnabled && this.authenticationService.companyProfileName != undefined) {
             this.isPleaseWaitButtonDisplayed = true;
-            this.loginWithUser(userName);
+            this.vanityURLService.checkUserWithCompanyProfile(this.authenticationService.companyProfileName, userName).subscribe(result => {
+              if (result.message === "success") {
+                this.loginWithUser(userName);
+              } else {
+                this.loading = false;
+                this.isPleaseWaitButtonDisplayed = false;
+                this.showVanityLoginErrorMessage();
+              }
+            });
           }
           else {
             this.loginWithUser(userName);
@@ -415,6 +423,31 @@ bgIMage2:any;
       return `${prefixMessage} Please contact <a href="mailto:${supportEmailId}">${supportEmailId}</a>`;
     }
     return defaultMessage;
+  }
+
+  showVanityLoginErrorMessage() {
+    let companyProfileName = this.authenticationService.companyProfileName;
+    if (companyProfileName != undefined && companyProfileName != '') {
+      this.vanityURLService.getVanityUrlDetailsbyCompanyProfileName(companyProfileName).subscribe(
+        response => {
+          if (response.statusCode == 200) {
+            let companyName = response.data.companyName;
+            let supportEmailId = response.data.supportEmailId;
+            let errorMessage = `You are not associated to ${companyName}.`;
+            if (supportEmailId != undefined && supportEmailId != null && supportEmailId != '') {
+              errorMessage += ` Please contact <a href="mailto:${supportEmailId}">${supportEmailId}</a>`;
+            }
+            this.setCustomeResponse("ERROR", errorMessage);
+          } else {
+            this.setCustomeResponse("ERROR", this.properties.VANITY_URL_ERROR1);
+          }
+        }, error => {
+          this.xtremandLogger.errorPage(error);
+          this.setCustomeResponse("ERROR", this.properties.VANITY_URL_ERROR1);
+        });
+    } else {
+      this.setCustomeResponse("ERROR", this.properties.VANITY_URL_ERROR1);
+    }
   }
   
 }

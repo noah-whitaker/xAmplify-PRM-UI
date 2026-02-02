@@ -1092,7 +1092,7 @@ export class AddDealComponent implements OnInit {
         if (this.activeCRMDetails.createdForActiveCRMType === "XAMPLIFY") {
           let sfDefaultFields = formLabelDTOs.filter(fLabel => fLabel.sfCustomField === false);
           for (let formLabel of sfDefaultFields) {
-            if (formLabel.labelId === "Name" || formLabel.labelId === "Deal_Name") {
+            if (formLabel.labelId === "Name" || formLabel.labelId === "Deal_Name" || formLabel.labelId == "dealname") {
               this.deal.title = formLabel.value;
             } else if (formLabel.labelId === "Description") {
               this.deal.description = formLabel.value;
@@ -1102,7 +1102,7 @@ export class AddDealComponent implements OnInit {
               this.deal.leadSource = formLabel.value;
             } else if (formLabel.labelId === "Amount" || formLabel.labelId === "amount") {
               this.deal.amount = formLabel.value;
-            } else if (formLabel.labelId === "CloseDate" || formLabel.labelId === "Close_Date") {
+            } else if (formLabel.labelId === "CloseDate" || formLabel.labelId === "Close_Date" || formLabel.labelId == "closedate") {
               this.deal.closeDateString = formLabel.value;
             } else if (formLabel.labelId === "NextStep") {
               this.deal.nextStep = formLabel.value;
