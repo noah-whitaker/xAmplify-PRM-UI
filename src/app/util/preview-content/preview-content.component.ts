@@ -45,7 +45,7 @@ export class PreviewContentComponent implements OnInit {
     } else {
       this.isPdf = true;
       this.pdfLoader = true;
-      this.http.get(this.previewPath + '&access_token=' + encodeURIComponent(this.authenticationService.access_token), { responseType: 'blob' })
+      this.http.get(this.previewPath, { responseType: 'blob' })
         .subscribe(response => {
           this.url = URL.createObjectURL(response);
           this.displayFile(this.url, this.fileType);
