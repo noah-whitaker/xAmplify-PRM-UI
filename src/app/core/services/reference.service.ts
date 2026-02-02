@@ -4118,9 +4118,9 @@ getFirstLetter(inputString:any) {
 			let self = this;
 			swal({
 				title: 'Upgrade Your account to access this feature',
-				text: "You won't be able to perform this action!",
+				text: "Contact <b>support@xamplify.com</b> for assistance.",
 				type: 'warning',
-				showCancelButton: true,
+				showCancelButton: false,
 				swalConfirmButtonColor: '#54a7e9',
 				swalCancelButtonColor: '#999',
 			}).then(function (myData: any) {

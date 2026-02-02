@@ -131,7 +131,7 @@ export class ManageApprovalComponent implements OnInit {
   }
 
   callInitMethos() {
-  
+    this.getCompanyId();
   }
 
   ngOnDestroy() {

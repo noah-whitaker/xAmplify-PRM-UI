@@ -1024,22 +1024,6 @@
                                                                     aria-hidden="true"></i>
                                                                 <div class="clickicons"></div>
                                                             </a>
-                                                            <a class="custom-icon"
-                                                                *ngIf="!contact.unsubscribed && authenticationService?.module?.adminOrSuperVisor && contact.partnerStatus != 'deactivated'"
-                                                                data-toggle="tooltip" data-placement="bottom"
-                                                                title="Unsubscribe" (click)="unsubscribeUser(contact)">
-                                                                <i class="fa fa-bell-slash-o IconCustomization"
-                                                                    aria-hidden="true"></i>
-                                                                <div class="clickicons"></div>
-                                                            </a>
-                                                            <a class="custom-icon"
-                                                                *ngIf="contact.unsubscribed && authenticationService?.module?.adminOrSuperVisor && contact.partnerStatus != 'deactivated'"
-                                                                data-toggle="tooltip" data-placement="bottom"
-                                                                title="subscribe" (click)="resubscribeUser(contact)">
-                                                                <i class="fa fa-bell-o IconCustomization"
-                                                                    aria-hidden="true"></i>
-                                                                <div class="clickicons"></div>
-                                                            </a>
                                                             <a class="custom-icon" id="envolope_{{i}}" *ngIf="contact.partnerStatus != 'deactivated'"
                                                                 aria-hidden="true" data-toggle="tooltip"
                                                                 data-placement="bottom" title="Send Email Notification"
