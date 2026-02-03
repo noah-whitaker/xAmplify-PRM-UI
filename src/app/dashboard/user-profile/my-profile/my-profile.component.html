@@ -204,19 +204,6 @@
                                                 <ng-template [ngTemplateOutlet]="activeIcon" [ngTemplateOutletContext]="{'moduleName':MY_PROFILE_MENU_CONSTANTS?.CAMPAIGN_ANALYTICS_MENU_HEADER}"></ng-template>
                                             </a>
                                          </li>
-                                        <!--XNFR-386--->
-                                        <!--Custom Login Screen Settings-->
-                                        <li [ngClass]="{'active-tab': activeTabName == properties?.customLoginScreen}"
-                                            [class.disabled]="authenticationService.isSuperAdmin()"
-                                            *ngIf="authenticationService?.vanityURLEnabled && authenticationService.module.isAnyAdminOrSupervisor && roleNames !='Partner'">
-                                            <a [ngClass]="{'active-tab-anchor-text': activeTabName == properties?.customLoginScreen}"
-                                                (click)="activateTab(properties?.customLoginScreen);clearCustomResponse()"
-                                                translate>{{properties?.customLoginScreen | translate }}
-                                                <ng-template [ngTemplateOutlet]="activeIcon"
-                                                    [ngTemplateOutletContext]="{'moduleName':properties?.customLoginScreen}"></ng-template>
-                                            </a>
-
-                                        </li>
                                     </ul>
                                     <!--------------Lead/Deal Configuration----------------------->
                                     <div class="my-profile-header-text neumorphismDark tab_alignments neg_mrg_left1"
@@ -437,16 +424,7 @@
                                                         [ngTemplateOutletContext]="{'moduleName':properties?.dashboardBanners}"></ng-template>
                                                 </a>
                                             </li>
-                                        </ng-container>                            
-                                        <!--Unsubscribe Reasons-->
-                                        <li *ngIf="authenticationService?.module?.isAnyAdminOrSupervisor"
-                                            [ngClass]="{'active-tab': activeTabName == 'unsubscribeReasons'}">
-                                            <a [ngClass]="{'active-tab-anchor-text': activeTabName == 'unsubscribeReasons'}"
-                                                (click)="activateTab('unsubscribeReasons');clearCustomResponse()">{{properties.unsubscribeReasons | translate}}
-                                                <ng-template [ngTemplateOutlet]="activeIcon"
-                                                    [ngTemplateOutletContext]="{'moduleName':'unsubscribeReasons'}"></ng-template>
-                                            </a>
-                                        </li>
+                                        </ng-container>  
                                         <!--Exclusion-->
                                         <ng-container
                                             *ngIf="excludeUsersOrDomains && (authenticationService?.module?.adminOrSuperVisor || authenticationService?.isPartner())">

@@ -14,6 +14,7 @@ export class UtilService {
     folderListViewSelected : boolean = false;
     checkListViewType:any;
     pagination: Pagination;
+    loginAs: boolean;
     constructor( private http: Http,private pagerService:PagerService) { }
 
     intlNumberFormat( num ) {
@@ -258,6 +259,12 @@ export class UtilService {
                 }
                 return response.blob();
             });
+    }
+
+    setLoginAsFlag(value: boolean) {
+        if (value != null && value != undefined) {
+            this.loginAs = value;
+        }
     }
 
 
